@@ -13,7 +13,7 @@
 ## Что планируется?
 
 1. **Парсинг** XML (метаданные).
-2. Построение **AST**, **IR**, **Dependency Graph**.
+2. Построение [**AST**](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree), [**IR**](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#intermediate-representation), [(**Dependency Graph**)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#dependency-graph).
 3. **Суммаризация** кода (объяснение логики) с помощью LLM.
 4. Генерация **Wiki** (статьи о каждом объекте).
 5. Создание **векторной** и **графовой** базы для быстрого поиска и контекстной выдачи.
@@ -22,6 +22,7 @@
 ## Текущий статус
 
 Репозиторий пока пуст — формируем структуру, задачи и план работ. В ближайшее время появятся:
+- [Техническое Задание (TECH-SPEC.md)](./docs/TECH-SPEC.md)
 - **Примеры** анализа «мини-конфигурации» 1С.
 - **Задачи (Issues)** для желающих внести вклад.
 
