@@ -1,4 +1,4 @@
-Ниже приведено примерное **Техническое Задание (ТЗ)** на разработку программы, которая **по выгруженной из 1С конфигурации (только XML-файлы)** строит **все уровни абстракции** (начиная с [4-го уровня — AST](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree)) и создает **“википедию”** (базу знаний), а также **RAG / GraphRAG**-систему для AI-бота, способного отвечать на вопросы по конфигурации.
+Ниже приведено примерное **Техническое Задание (ТЗ)** на разработку программы, которая **по выгруженной из 1С конфигурации (только XML-файлы)** строит **все уровни абстракции** (начиная с [4-го уровня — AST](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree)) и создает **“википедию”** (базу знаний), а также **RAG / GraphRAG**-систему для AI-бота, способного отвечать на вопросы по конфигурации.
 
 При этом предполагается, что **предыдущая** программа (по предыдущему ТЗ) у нас **уже** существует, и мы можем повторно использовать её модули (парсеры XML, AST, IR, генераторы) или логику.  
 
@@ -7,7 +7,7 @@
 ## 1. Цель проекта
 
 1. **Считать** выгруженные из 1С XML-файлы (метаданные + модули в CDATA, структура директорий).  
-2. **Автоматически построить** для конфигурации **все уровни абстракции** (начиная от [**(4) AST**](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree) до [**(10) Business Model**](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-model)), либо хотя бы до [(8–9)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#domain-model), а также:  
+2. **Автоматически построить** для конфигурации **все уровни абстракции** (начиная от [**(4) AST**](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree) до [**(10) Business Model**](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-model)), либо хотя бы до [(8–9)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#domain-model), а также:  
    - Создать **«википедию»** (структурированную базу знаний, в удобном формате, например Markdown, HTML, Wiki-движок).  
    - Построить **GraphRAG** (Retrieval-Augmented Generation на графах и/или векторных embedding) для дальнейшего ответа на вопросы.  
    - Создать **AI-бота**, который будет использовать эту базу (вики + RAG) и отвечать на вопросы о конфигурации.  
@@ -23,7 +23,7 @@
 
 1. **Вход**: директория с выгрузкой XML-файлов конфигурации 1С (по аналогии с `v8unpack`).  
 2. **Выход**:  
-   - **Полная** цепочка абстракций (внутреннее хранение / БД / JSON …) от [(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree) до [(8) Domain Model](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#domain-model) / [(9) Business Processes](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-processes) / [(10) Business Model](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-model) (по возможности).  
+   - **Полная** цепочка абстракций (внутреннее хранение / БД / JSON …) от [(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree) до [(8) Domain Model](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#domain-model) / [(9) Business Processes](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-processes) / [(10) Business Model](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-model) (по возможности).  
    - **«Википедия»** (набор статей/страниц), описывающих объекты конфигурации, связи, модули, процедуры, и т.п.  
    - **RAG**-система:  
      - Векторные базы (embedding содержимого),  
@@ -37,22 +37,22 @@
 
 ## 3. Уровни абстракции (краткая спецификация)
 
-Делаем акцент: **начиная с [(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree)** — все пункты **включительно** до [(10) Business Model](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-model) (по возможности):
+Делаем акцент: **начиная с [(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree)** — все пункты **включительно** до [(10) Business Model](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-model) (по возможности):
 
-1. **[(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree)**  
+1. **[(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree)**  
    - Использовать готовые парсеры (из предыдущей программы) для текстов BSL: получение синтаксического дерева процедур, функций, операторов.  
-2. **[(5) Code Model / IR](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#code-model)**  
+2. **[(5) Code Model / IR](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#code-model)**  
    - Сопоставить AST с объектами метаданных (Документ, Справочник и т.п.), зафиксировать процедуры «ПриЗаписи», «ПриПроведении», вызвать зависимости и т.д.  
-3. **[(6) Dependency Graph](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#dependency-graph)**  
+3. **[(6) Dependency Graph](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#dependency-graph)**  
    - Построить граф, показывающий, кто вызывает что: модули, регистры, общие модули, справочники и т.д.  
-4. **[(7) Архитектурный / Функциональный](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#architectural-layer)**  
+4. **[(7) Архитектурный / Функциональный](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#architectural-layer)**  
    - Определить, какие подсистемы, объекты, формы, модули — «скелет» конфигурации.  
-5. **[(8) Domain Model](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#domain-model)** (Предметная модель)  
+5. **[(8) Domain Model](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#domain-model)** (Предметная модель)  
    - Автоматически извлечь «сущности» (справочники, документы) и связи (реквизиты, табличные части).  
    - Где возможно, обращаться к LLM, чтобы «расшифровать» названия (например, «ЗаказПокупателя → Order»).  
-6. **[(9) Business Processes](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-processes)** (BPM)  
+6. **[(9) Business Processes](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-processes)** (BPM)  
    - Пытаться понять процедуры, связанные с жизненным циклом документов, «проведение», «отчеты», «бизнес-процесс» (если есть) и сгенерировать их диаграммы/описания.  
-7. **[(10) Business Model](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-model)**  
+7. **[(10) Business Model](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-model)**  
    - Высший уровень (для стейкхолдеров, KPI, метрик) — по возможности, частично автоматически при помощи LLM (если названия и логику можно агрегировать).  
 
 ---
@@ -90,7 +90,7 @@
 Во многих местах:  
 1. **Суммаризация** методов, кусков кода (AST) — «Поясни, что делает эта процедура».  
 2. **Генерация** описаний (wiki-статей, пояснений о бизнес-процессах).  
-3. **Переход** от технических названий к бизнес-трактовке [(8, 9, 10 уровни)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#domain-model).  
+3. **Переход** от технических названий к бизнес-трактовке [(8, 9, 10 уровни)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#domain-model).  
 
 > Программа должна уметь полуавтоматически вызывать LLM по фрагментам кода/описания. Можно сохранять результаты в «википедию» или «embedding» для RAG.  
 
@@ -104,7 +104,7 @@
    - Модули «Code Model / IR» (или хотя бы их идеи) — чтобы не дублировать код.  
 3. **Хранилища**:  
    - Как минимум, **векторная** БД (FAISS, Pinecone, Qdrant, etc.).  
-   - Возможно, **графовая** БД (Neo4j, ArangoDB…) для [(6) Dependency Graph](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#dependency-graph).  
+   - Возможно, **графовая** БД (Neo4j, ArangoDB…) для [(6) Dependency Graph](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#dependency-graph).  
    - Или можно хранить граф в той же реляционной БД, если есть подходящая модель.  
 4. **Wiki-генератор**:  
    - Создание структуры папок/файлов (Markdown) или API для MediaWiki/Confluence.  
@@ -114,13 +114,13 @@
 ## 7. Основные этапы работы
 
 1. **Сканирование** папки с XML-файлами → извлечение метаданных (объекты, реквизиты, формы).  
-2. **Сбор** текстов модулей (BSL) из CDATA → преобразование в [(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree).  
-3. **Построение** Code Model / IR [(5)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#code-model) → выявление процедур, кто куда пишет/читает.  
-4. **Dependency Graph** [(6)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#dependency-graph) → записать связи между объектами в какую-то структуру (граф).  
-5. **Архитектурный слой** [(7)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#architectural-layer) → обзор, подсистемы.  
-6. **Domain Model** [(8)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#domain-model) → (получаем полуавтоматически через LLM): «Справочник:Контрагенты = Entities:Clients», «Документ:ЗаказПокупателя = Entities:Order»…  
-7. **Business Processes** [(9)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-processes) → анализ процедур «ПриПроведении», «ПриЗаписи», «Scheduler», etc. + LLM для диаграмм.  
-8. **Business Model** [(10)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#business-model) → в целом, резюме для менеджмента (тоже с LLM).  
+2. **Сбор** текстов модулей (BSL) из CDATA → преобразование в [(4) AST](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree).  
+3. **Построение** Code Model / IR [(5)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#code-model) → выявление процедур, кто куда пишет/читает.  
+4. **Dependency Graph** [(6)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#dependency-graph) → записать связи между объектами в какую-то структуру (граф).  
+5. **Архитектурный слой** [(7)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#architectural-layer) → обзор, подсистемы.  
+6. **Domain Model** [(8)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#domain-model) → (получаем полуавтоматически через LLM): «Справочник:Контрагенты = Entities:Clients», «Документ:ЗаказПокупателя = Entities:Order»…  
+7. **Business Processes** [(9)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-processes) → анализ процедур «ПриПроведении», «ПриЗаписи», «Scheduler», etc. + LLM для диаграмм.  
+8. **Business Model** [(10)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#business-model) → в целом, резюме для менеджмента (тоже с LLM).  
 9. **Генерация статей** («Википедия»):  
    - Одноименные или переименованные сущности, их поля, логика, связи (сделать Markdown).  
    - Суммаризация кода (AST).  

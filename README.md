@@ -13,7 +13,7 @@
 ## Что планируется?
 
 1. **Парсинг** XML (метаданные).
-2. Построение [**AST**](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#abstract-syntax-tree), [**IR**](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#intermediate-representation), [(**Dependency Graph**)](https://github.com/1C-Migration-Lab/.github/blob/main/levels-of-abstraction.md#dependency-graph).
+2. Построение [**AST**](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#abstract-syntax-tree), [**IR**](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#intermediate-representation), [(**Dependency Graph**)](https://github.com/1C-Migration-Lab/.github/blob/main/docs/levels-of-abstraction.md#dependency-graph).
 3. **Суммаризация** кода (объяснение логики) с помощью LLM.
 4. Генерация **Wiki** (статьи о каждом объекте).
 5. Создание **векторной** и **графовой** базы для быстрого поиска и контекстной выдачи.
